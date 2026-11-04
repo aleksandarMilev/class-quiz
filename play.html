@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Играч · Класна викторина</title>
+  <meta name="theme-color" content="#170f4d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Unbounded:wght@600;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="player">
+  <div id="offline-banner" class="banner" role="status" hidden>Няма връзка…</div>
+  <header class="p-top" id="p-top" hidden>
+    <span class="p-name" id="p-name"></span>
+    <span class="p-score" id="p-score">0</span>
+  </header>
+
+  <main>
+    <section data-screen="loading" class="is-active">
+      <div class="spinner" role="status" aria-label="Зареждане"></div>
+    </section>
+
+    <section data-screen="error" class="message" hidden>
+      <h1 id="error-title">Нещо се обърка</h1>
+      <p id="error-text"></p>
+      <a class="btn" href="play.html" id="error-retry">Опитай пак</a>
+    </section>
+
+    <section data-screen="pin" hidden>
+      <h1 class="brand">Класна викторина</h1>
+      <form class="card" id="pin-form" novalidate>
+        <label class="field">
+          <span>PIN на играта</span>
+          <input class="pin-input" type="tel" id="pin-input" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="123456">
+        </label>
+        <p class="form-error" id="pin-error" role="alert"></p>
+        <button class="btn btn-primary" type="submit">Влез</button>
+      </form>
+    </section>
+
+    <section data-screen="name" hidden>
+      <h1 class="brand">Класна викторина</h1>
+      <form class="card" id="name-form" novalidate>
+        <label class="field">
+          <span>Твоето име</span>
+          <input type="text" id="name-input" maxlength="16" autocomplete="nickname" autocapitalize="words" spellcheck="false" placeholder="Име">
+        </label>
+        <p class="form-error" id="name-error" role="alert"></p>
+        <button class="btn btn-primary" type="submit" id="name-btn">Готово</button>
+      </form>
+    </section>
+
+    <section data-screen="wait" class="wait" hidden>
+      <div class="big-shapes" id="wait-shapes"></div>
+      <h1 id="wait-title"></h1>
+      <p id="wait-text"></p>
+    </section>
+
+    <section data-screen="question" class="question" hidden>
+      <div class="timebar" id="timebar"><div id="timebar-fill"></div></div>
+      <div class="answer-grid" id="answer-grid"></div>
+    </section>
+
+    <section data-screen="sent" class="wait" hidden>
+      <div class="sent-shape" id="sent-shape"></div>
+      <h1>Отговорът е изпратен</h1>
+      <p>Гледай екрана…</p>
+    </section>
+
+    <section data-screen="result" hidden>
+      <div class="result" id="result">
+        <div class="result-icon" id="result-icon" aria-hidden="true"></div>
+        <h1 id="result-title"></h1>
+        <p class="gain" id="result-gain"></p>
+      </div>
+      <p class="stat-line">Точки: <b id="result-score"></b></p>
+      <p class="stat-line" id="result-rank"></p>
+    </section>
+
+    <section data-screen="ended" hidden>
+      <p class="eyebrow">Край на играта</p>
+      <p class="final-rank" id="final-rank"></p>
+      <h1 id="final-text"></h1>
+      <p class="stat-line">Точки: <b id="final-score"></b></p>
+    </section>
+  </main>
+
+  <script type="module" src="js/play.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+export default {
+  id: "boolean-logic",
+  title: "Булева логика (8. клас)",
+  questions: [
+    { q: "Какво е твърдение в логиката?", answers: ["Изречение, което е само истина или само лъжа", "Всеки въпрос", "Изречение с „може би“", "Мнение"], correct: 0, time: 20, explain: "Твърдението има точно една стойност: истина или лъжа. Средно положение няма." },
+    { q: "„2 + 2 = 5“ е твърдение със стойност:", answers: ["TRUE", "FALSE", "Може би", "Не е твърдение"], correct: 1, time: 20, explain: "Изречението е твърдение, но е невярно, затова стойността му е FALSE." },
+    { q: "С колко стойности работят компютрите в булевата логика?", answers: ["1", "2", "3", "10"], correct: 1, time: 20, explain: "Само две: 0 и 1, тоест FALSE и TRUE." },
+    { q: "Как се нарича булевият тип данни в програмирането?", answers: ["int", "string", "bool", "char"], correct: 2, time: 20, explain: "bool пази само TRUE или FALSE. int е за цели числа, string за текст." },
+    { q: "Ако x = 3, каква е стойността на x > 5?", answers: ["TRUE", "FALSE"], correct: 1, time: 20, explain: "3 не е по-голямо от 5, значи твърдението е FALSE." },
+    { q: "Какво прави операцията NOT?", answers: ["Обръща стойността", "Събира две стойности", "Винаги дава TRUE", "Сравнява две числа"], correct: 0, time: 20, explain: "NOT превръща TRUE във FALSE и FALSE в TRUE." },
+    { q: "NOT TRUE = ?", answers: ["TRUE", "FALSE"], correct: 1, time: 10, explain: "NOT обръща стойността: TRUE става FALSE." },
+    { q: "Кой символ означава NOT в програмирането?", answers: ["&&", "||", "!", "=="], correct: 2, time: 20, explain: "! е NOT. && е AND, || е OR, == е сравнение." },
+    { q: "„Времето НЕ е лошо.“ Какво означава това?", answers: ["Времето е хубаво", "Времето е лошо", "Вали дъжд", "Не знаем"], correct: 0, time: 20, explain: "NOT(лошо) = хубаво. Отрицанието обръща твърдението." },
+    { q: "Кога AND връща TRUE?", answers: ["Когато всички условия са TRUE", "Когато поне едно е TRUE", "Когато всички са FALSE", "Винаги"], correct: 0, time: 20, explain: "AND е строг: трябва ВСИЧКИ условия да са TRUE." },
+    { q: "TRUE AND FALSE = ?", answers: ["TRUE", "FALSE"], correct: 1, time: 10, explain: "Едно FALSE е достатъчно AND да даде FALSE." },
+    { q: "Кой символ означава AND в програмирането?", answers: ["||", "!", "&&", "=="], correct: 2, time: 20, explain: "&& е AND. Помни: две амперсанд = И." },
+    { q: "Имам билет и пари, но влакът закъсня. Трябват И трите условия. Тръгвам ли?", answers: ["Да", "Не"], correct: 1, time: 20, explain: "Едно от трите условия е FALSE, затова AND дава FALSE." },
+    { q: "Кога OR връща FALSE?", answers: ["Когато поне едно е FALSE", "Само когато всички са FALSE", "Когато всички са TRUE", "Никога"], correct: 1, time: 20, explain: "OR е FALSE само ако НИТО ЕДНО условие не е вярно." },
+    { q: "FALSE OR TRUE = ?", answers: ["TRUE", "FALSE"], correct: 0, time: 10, explain: "На OR му стига едно TRUE." },
+    { q: "Кой символ означава OR в програмирането?", answers: ["&&", "||", "!", "~"], correct: 1, time: 20, explain: "|| е OR. Две вертикални черти = ИЛИ." },
+    { q: "„Плащам с карта ИЛИ кеш.“ Имам само кеш. Мога ли да платя?", answers: ["Да", "Не"], correct: 0, time: 20, explain: "OR изисква само едното условие. Кешът е достатъчен." },
+    { q: "Коя операция е най-строга?", answers: ["NOT", "AND", "OR"], correct: 1, time: 20, explain: "AND изисква всички условия да са изпълнени. OR е най-гъвкавата." },
+    { q: "Колко реда има таблицата на истинност за A AND B?", answers: ["2", "3", "4", "8"], correct: 2, time: 20, explain: "Два входа с по 2 стойности: 2 × 2 = 4 комбинации." },
+    { q: "В колко от 4-те реда на таблицата за A OR B резултатът е TRUE?", answers: ["1", "2", "3", "4"], correct: 2, time: 20, explain: "В 3 реда. FALSE е само при FALSE OR FALSE." },
+    { q: "Какъв е редът на приоритет без скоби?", answers: ["NOT → AND → OR", "OR → AND → NOT", "AND → OR → NOT", "Отляво надясно"], correct: 0, time: 30, explain: "Първо NOT, после AND, накрая OR. Като умножение преди събиране." },
+    { q: "Какво се изчислява първо в (A AND B) OR C?", answers: ["OR", "Скобата (A AND B)", "C", "Няма значение"], correct: 1, time: 20, explain: "Скобите винаги са първи, независимо от приоритета." },
+    { q: "a = TRUE, b = FALSE, c = TRUE. (a AND b) OR c = ?", answers: ["TRUE", "FALSE"], correct: 0, time: 30, explain: "(TRUE AND FALSE) = FALSE. После FALSE OR TRUE = TRUE." },
+    { q: "a = TRUE, b = FALSE, c = TRUE. NOT(a OR b) AND c = ?", answers: ["TRUE", "FALSE"], correct: 1, time: 30, explain: "(TRUE OR FALSE) = TRUE. NOT TRUE = FALSE. FALSE AND TRUE = FALSE." },
+    { q: "За кои x е вярно (x > 0 AND x < 10) OR x == 100?", answers: ["Само 100", "1 до 9 и 100", "Всички x над 0", "1 до 100"], correct: 1, time: 30, explain: "Скобата е вярна за 1 до 9. OR добавя още x = 100." },
+    { q: "Достъп: парола вярна AND акаунт активен. Паролата е вярна, акаунтът е блокиран. Влизам ли?", answers: ["Да", "Не"], correct: 1, time: 20, explain: "TRUE AND FALSE = FALSE. Системата отказва достъп." },
+    { q: "Кое е вярно за булевата логика?", answers: ["Стои зад всяко IF условие", "Ползва се само в математиката", "Работи с „може би“", "Не се ползва в игри"], correct: 0, time: 20, explain: "Всяко IF, филтър и проверка за достъп се свежда до TRUE или FALSE." }
+  ]
+};

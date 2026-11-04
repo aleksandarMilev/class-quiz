@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Водещ · Класна викторина</title>
+  <meta name="theme-color" content="#170f4d">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Unbounded:wght@600;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="host">
+  <div id="offline-banner" class="banner" role="status" hidden>Няма връзка…</div>
+  <div class="host-tools">
+    <button class="btn btn-ghost btn-small" id="fullscreen-btn" type="button" title="Цял екран (F)">⛶ Цял екран</button>
+  </div>
+
+  <main>
+    <section data-screen="loading" class="is-active">
+      <div class="spinner" role="status" aria-label="Зареждане"></div>
+    </section>
+
+    <section data-screen="error" class="message" hidden>
+      <h1 id="error-title">Нещо се обърка</h1>
+      <p id="error-text"></p>
+      <a class="btn" href="host.html" id="error-retry">Към началото</a>
+    </section>
+
+    <!-- 1. Setup -->
+    <section data-screen="setup" class="setup" hidden>
+      <h1 class="brand">Класна викторина</h1>
+      <form class="card" id="setup-form">
+        <h2>Нова игра</h2>
+        <label class="field">
+          <span>Викторина</span>
+          <select id="quiz-select" required></select>
+        </label>
+        <p class="quiz-meta" id="quiz-meta"></p>
+        <label class="switch">
+          <input type="checkbox" id="timer-toggle" checked>
+          <span id="timer-label">Таймер вкл.</span>
+        </label>
+        <p class="form-error" id="setup-error" role="alert"></p>
+        <button class="btn btn-primary" type="submit" id="create-btn" data-primary>Създай игра</button>
+      </form>
+    </section>
+
+    <!-- 2. Lobby -->
+    <section data-screen="lobby" class="lobby" hidden>
+      <div class="lobby-head">
+        <div class="join-info">
+          <p class="eyebrow">Отвори на телефона</p>
+          <p class="join-url" id="join-url"></p>
+          <p class="eyebrow">PIN на играта</p>
+          <p class="pin" id="pin"></p>
+        </div>
+        <div class="qr" id="qr" aria-label="QR код за влизане"></div>
+      </div>
+      <div class="lobby-bar">
+        <h2 id="lobby-title"></h2>
+        <span class="count"><b id="player-count">0</b> <span id="player-count-label">играчи</span></span>
+        <button class="btn btn-primary" id="start-btn" type="button" data-primary disabled>Започни</button>
+      </div>
+      <ul class="player-list" id="player-list" aria-live="polite"></ul>
+      <p class="hint" id="lobby-empty">Чакаме играчи…</p>
+    </section>
+
+    <!-- 3. Question -->
+    <section data-screen="question" class="question" hidden>
+      <div class="q-top">
+        <span class="q-counter" id="q-counter"></span>
+        <div class="progress"><div class="progress-fill" id="q-progress"></div></div>
+        <span class="answered" id="answered"></span>
+      </div>
+      <div class="q-body">
+        <div class="ring" id="ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <span id="ring-text"></span>
+        </div>
+        <h1 class="q-text" id="q-text"></h1>
+      </div>
+      <div class="tiles" id="q-tiles"></div>
+      <div class="q-actions">
+        <button class="btn" id="reveal-btn" type="button" data-primary>Покажи отговора</button>
+      </div>
+    </section>
+
+    <!-- 4. Reveal -->
+    <section data-screen="reveal" class="reveal" hidden>
+      <div class="q-top">
+        <span class="q-counter" id="r-counter"></span>
+        <div class="progress"><div class="progress-fill" id="r-progress"></div></div>
+        <span class="answered" id="r-answered"></span>
+      </div>
+      <h1 class="q-text" id="r-text"></h1>
+      <div class="reveal-mid">
+        <div class="chart" id="chart"></div>
+        <p class="explain" id="explain"></p>
+      </div>
+      <div class="tiles revealed" id="r-tiles"></div>
+      <div class="q-actions">
+        <button class="btn" id="to-leaderboard-btn" type="button" data-primary>Напред</button>
+      </div>
+    </section>
+
+    <!-- 5. Leaderboard -->
+    <section data-screen="leaderboard" class="leaderboard" hidden>
+      <h1>Класиране</h1>
+      <ol class="leader-list" id="leader-list"></ol>
+      <div class="leader-actions">
+        <button class="btn" id="next-btn" type="button" data-primary>Следващ въпрос</button>
+      </div>
+    </section>
+
+    <!-- 6. End -->
+    <section data-screen="ended" class="ended" hidden>
+      <canvas id="confetti" aria-hidden="true"></canvas>
+      <h1 id="end-title"></h1>
+      <div class="podium" id="podium"></div>
+      <ol class="final-list" id="final-list"></ol>
+      <button class="btn" id="new-game-btn" type="button" data-primary>Нова игра</button>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script type="module" src="js/host.js"></script>
+</body>
+</html>

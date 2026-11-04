@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Класна викторина</title>
+    <meta name="theme-color" content="#170f4d" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Unbounded:wght@600;800&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="landing">
+    <main>
+      <section data-screen="home" class="is-active">
+        <div>
+          <div class="brand-dots" id="brand-dots"></div>
+          <h1 class="brand">Класна викторина</h1>
+        </div>
+        <div class="choices">
+          <form
+            class="choice choice-play"
+            id="join-form"
+            action="play.html"
+            method="get"
+          >
+            <h2>Играч</h2>
+            <label class="field">
+              <span>PIN на играта</span>
+              <input
+                class="pin-input"
+                type="tel"
+                name="pin"
+                id="pin"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="6"
+                pattern="[0-9]{6}"
+                placeholder="123456"
+                aria-describedby="pin-error"
+              />
+            </label>
+            <p
+              class="form-error"
+              id="pin-error"
+              role="alert"
+              style="color: #fff"
+            ></p>
+            <button class="btn" type="submit">Играч</button>
+          </form>
+          <div class="choice choice-host">
+            <h2>Водещ</h2>
+            <p>Пусни играта на проектора. Учениците влизат с QR код или PIN.</p>
+            <a class="btn" href="host.html">Водещ</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module">
+      import { shapeSvg, COLORS } from "./js/ui.js";
+      document.getElementById("brand-dots").innerHTML = COLORS.map(
+        (color, i) => `<span style="color:${color}">${shapeSvg(i, "")}</span>`,
+      ).join("");
+      const form = document.getElementById("join-form");
+      const input = document.getElementById("pin");
+      input.addEventListener(
+        "input",
+        () => (input.value = input.value.replace(/\D/g, "").slice(0, 6)),
+      );
+      form.addEventListener("submit", (e) => {
+        const pin = input.value.trim();
+        if (pin && !/^\d{6}$/.test(pin)) {
+          e.preventDefault();
+          document.getElementById("pin-error").textContent =
+            "PIN кодът е 6 цифри.";
+          input.focus();
+        } else if (!pin) {
+          input.disabled = true; // open play.html without ?pin= so it asks for the PIN
+        }
+      });
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDvNGT1MSDhBKBjiUBS3mHQTJ7M_0XgfmA",
+        authDomain: "kahoot-f9e87.firebaseapp.com",
+        databaseURL:
+          "https://kahoot-f9e87-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "kahoot-f9e87",
+        storageBucket: "kahoot-f9e87.firebasestorage.app",
+        messagingSenderId: "609838671530",
+        appId: "1:609838671530:web:fe187a22b4ca53aa52d2d3",
+        measurementId: "G-FH0JF87ZEH",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </body>
+</html>

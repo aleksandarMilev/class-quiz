@@ -1,0 +1,9 @@
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+.firebase/
+*-debug.log
+firebase-debug.*.log
+.DS_Store
+Thumbs.db
