@@ -1,5 +1,3 @@
-// Firebase bootstrap shared by host and player pages.
-// SDK version is pinned here and only here (13.2.0, modular, loaded from Google's CDN).
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 import {
   getAuth,
@@ -30,7 +28,6 @@ export {
 
 export const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
 
-// Must match the --project flag in package.json scripts. "demo-" projects never touch real Firebase.
 const EMULATOR_PROJECT = "demo-klasna-viktorina";
 const emulatorConfig = {
   apiKey: "demo-api-key",
@@ -40,7 +37,6 @@ const emulatorConfig = {
   appId: "demo-app",
 };
 
-/** True when js/firebase-config.js still has the placeholder values (only matters when deployed). */
 export const configMissing =
   !isLocal && JSON.stringify(firebaseConfig).includes("TODO");
 
@@ -53,7 +49,6 @@ if (isLocal) {
   connectDatabaseEmulator(db, "127.0.0.1", 9000);
 }
 
-/** Resolves with the signed-in user, signing in anonymously if needed. The uid persists across reloads. */
 export function signIn() {
   return new Promise((resolve, reject) => {
     const stop = onAuthStateChanged(
@@ -68,14 +63,13 @@ export function signIn() {
   });
 }
 
-// Server clock: never trust device clocks for timing.
 let serverOffset = 0;
 onValue(ref(db, ".info/serverTimeOffset"), (snap) => {
   serverOffset = Number(snap.val()) || 0;
 });
+
 export const serverNow = () => Date.now() + serverOffset;
 
-/** Calls cb(true|false) whenever the connection to the database changes. Returns an unsubscribe function. */
 export function watchConnection(cb) {
   return onValue(ref(db, ".info/connected"), (snap) => cb(snap.val() === true));
 }
